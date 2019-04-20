@@ -45,7 +45,7 @@
 	<link rel="icon" href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAzUExURQAAAMQVG8QVG8QVG8QVG8MUGcQWHMQWHMQWHMQVGsQVG8QWHMMVG8QVG8QVGsMUGcQWHBiWaGEAAAAQdFJOUwAlilPupF/5xQsYM7racUEuThiQAAAA5klEQVQ4y+WTWXLEMAhE0YJAO/c/bYxkbM3kBsn7cqm7cLewAf4fxeX9kI1PvWIfeuSGN8ZpcY0kBoDJkYw4Xj0jiciAynLQXoOPepDAq88m9PDoY+mSchPpI6TNfDKEvkcmx3K+2Ji3vg3eGTbAPcHUQL0Z6PYFoWrcaRtO/Cq4gnPQnqk0+VVzFYgh46qZ+OE6Ry2gOg0ovAzg6s3kZahagDDDGp7O3TU17FCtgBnKTGGj0TzsAg7MkH00NNkE1ftcE1m+a9IV4UoQ071O7VKQ3mVj0UuO9lVUJp+herzxIf+Vf+UH6HQR34ampwcAAAAASUVORK5CYII=">
 	<link rel="stylesheet" type="text/css" href='//fonts.googleapis.com/css?family=Calibri'>
 	<link rel="stylesheet" type="text/css" href='//fonts.googleapis.com/css?family=Open+Sans:400,800italic,800,700italic,700,600italic,600,400italic,300italic,300'>
-	<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/couture" type="text/css"/>
+	<!-- <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/couture" type="text/css"/> -->
 	
 	<link rel="stylesheet" type="text/css" href="<?=base_url('css/bootstrap.min.css');?>" media="all"/>
 	<link rel="stylesheet" type="text/css" href="<?=base_url('css/font-awesome.css');?>">
@@ -119,20 +119,6 @@ jQuery(function() {
 		});
 	});
 
-	$.ajax({
-		url: "https://geoip-db.com/jsonp",
-		jsonpCallback: "callback",
-		dataType: "jsonp",
-		success: function( location ) {
-			// $('#country').html(location.country_name);
-			$('#state').html(location.state);
-			$('#city').html(location.city);
-			// $('#latitude').html(location.latitude);
-			// $('#longitude').html(location.longitude);
-			// $('#ip').html(location.IPv4);  
-		}
-	});     
-
 });
 </script>
 <!--//End-rate-->
@@ -147,6 +133,17 @@ $(window).load(function() {
     animation: "slide",
     controlNav: "thumbnails"
   });
+
+	$(".dropdown").hover(
+		function() {
+			$('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+			$(this).toggleClass('open');
+		},
+		function() {
+			$('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+			$(this).toggleClass('open');
+		}
+	);
 
 });
 </script>
@@ -185,23 +182,7 @@ $(window).load(function() {
 		$("#cart").on("click", function() {
 			$(".shopping-cart").fadeToggle( "fast");
 		});
-	
-	  // $('#img-logo').hover(function(){
-		// 	$(this).attr('src','<?= site_url('images/asovic2.png'); ?>');
-		// },function(){
-		// 	$(this).attr('src','<?= site_url('images/asovic.png'); ?>');
-		// });
-	
-	  // $('.dropdown-toggle').hover(function(){
-		// 	var menu = $(this).attr('data-menu');
-		// 	$('#'+menu).not('.in .dropdown-menu').stop(true, true).delay(100).fadeIn(400);
-		// 	$(this).toggleClass('open');
-		// },function(){
-		// 	var menu = $(this).attr('data-menu');
-		// 	$('#'+menu).not('.in .dropdown-menu').stop(true, true).delay(100).fadeOut(400);
-		// 	$(this).toggleClass('open');
-		// });
-	
+		
 		$('#login-form-link').click(function(e) {
 			$("#login-form").delay(100).fadeIn(100);
 			$("#register-form").fadeOut(100);
@@ -217,250 +198,170 @@ $(window).load(function() {
 			$(this).addClass('active');
 			e.preventDefault();
 		});
-	
-		var navbar = document.getElementById("nav1");
-		var navmenu = document.getElementById("bs-megadropdown-tabs");
-		var sticky = navbar.offsetTop;
-		var topPos = (window.screen.width > 768) ? 132: 192;
-		
-		$(".dropdown-menu.catalog").css( 'top', topPos+'px');
-		
-		window.onscroll = function() {scrollFunction()};
-
-		function scrollFunction() {
-			
-			if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-				document.getElementById("myBtn").style.display = "block";
-			} else {
-				document.getElementById("myBtn").style.display = "none";
-			}
-			
-			if (window.pageYOffset >= sticky) {
-				
-				navbar.classList.add("sticky");
-				navmenu.classList.add("sticky")
-				
-				topPos = 40;
-				$(".dropdown-menu.catalog").css( 'top', topPos+'px');
-			} else {
-				
-				navbar.classList.remove("sticky");
-				navmenu.classList.remove("sticky");
-				
-				if (window.screen.width > 768)
-				{
-					topPos = 132 - window.pageYOffset;
-				}
-				else
-				{
-					topPos = 192 - window.pageYOffset;
-				}
-				$(".dropdown-menu.catalog").css( 'top', topPos+'px');
-			}
-		}
 	});
 	</script>
-	<link rel="stylesheet" type="text/css" href="<?=base_url('css/introjs.css');?>">
 
 	<!--header-->
-		<div class="header">
-			<div class="header-top-most">
-				<div class="container2">
-					<div class="top-left">
-						<a href="<?php echo site_url('equipment'); ?>"><img id="img-logo" class="img-header" src="<?= site_url('images/equipment/askitchen.jpg'); ?>" alt="ASKITCHEN Logo" hspace="3" /></a>
-						<a href="<?php echo site_url('utensil'); ?>" target="_blank"><img class="img-header" src="<?= site_url('images/equipment/utensilatas1.jpg'); ?>" alt="ASOVIC Logo" hspace="3" /></a>
-						<a href="http://www.muchef.com/" target="_blank"><img class="img-header" src="<?= site_url('images/equipment/muchef.jpg'); ?>" alt="MUCHEF Logo" hspace="3" /></a>
-					</div>
-					<div class="clearfix"></div>
+	<div class="header">
+		<!-- Navigation -->
+		<nav class="navbar navbar-default w3ls navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header wthree nav_2">
+					<!-- <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button> -->
+					<a class="" href="<?= site_url(); ?>"><img src="images/logo-muchef.jpg" alt="Logo MUCHEF"></a> 
+					<ul class="w3header-cart">
+						<li class="wthreecartaits"><span class="my-cart-icon"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i><span class="badge badge-notify my-cart-badge"></span></span></li>
+					</ul>
 				</div>
-			</div>
-			<div class="header-top">
-				<div class="container top">
-					<div class="top-left">
-						<div>
-							<a href="<?php echo site_url('equipment'); ?>"><img class="logo atas" src="<?= site_url('images/equipment/logoasknew.png'); ?>" alt="ASKITCHEN"></a>
-						</div>
-						<div class="location">
-							<!-- <img src="<?= site_url('images/location.png'); ?>" alt="location"/>
-							<span style="display: inline-block; vertical-align: middle; color:#fff;">Deliver To<br><span id="city"></span>,&nbsp<span id="state"></span></span></a> -->
-						</div>
-					</div>
-					<div class="top-left2" data-step="1" data-tooltipclass="forIntro" data-intro="Click here to search our item.">
-						<!-- search form -->
-						<form id="frmSearch" action="<?php echo site_url('search'); ?>" method="get" class="sidebar-form">
-							<div class="input-group search">
-								<div class="input-group-btn">
-									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All <span class="caret"></span></button>
-									<ul class="dropdown-menu">
-									<?php
-										foreach ($this->data['golongan'] as $item) {
-									?>
-										<li><a href="<?php echo site_url('categories/'.$item->kdgol); ?>"><?= $item->nama ?></a></li>
-									<?php
-										}
-									?>
-									</ul>
+				<div id="bs-megadropdown-tabs" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle w3-agile hyper" data-toggle="dropdown"><span> Aprons </span></a>
+							<ul class="dropdown-menu aits-w3 multi multi1">
+								<div class="row">
+
+									<?php foreach ($item_21 as $detail) { ?>	
+									<div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
+										<a href="<?= site_url('subcategories/'.$detail->kdgol.'/'.$detail->kdgol2); ?>"><img src="<?php echo site_url($products_dir.'/'.$detail->gbr); ?>" alt="<?= $detail->nama ?>"></a>
+										<p class="sample"><a href="<?= site_url('subcategories/'.$detail->kdgol.'/'.$detail->kdgol2); ?>"><?= $detail->nama ?></a></p>
+									</div>
+									<?php } ?>
+									<div class="clearfix"></div>
 								</div>
-								<input type="text" name="q" class="form-control" placeholder="Search for..." value="">
-								<span class="input-group-btn">
-									<button id='search-btn' class="btn btn-default-go" type="button" onclick="frmSearch.submit();"><img class="img-go" src="<?= site_url('images/search.png'); ?>"></button>
-								</span>
-							</div>
-						</form>
-						
-						<nav class="navbar navbar-default" id="nav1">
-							<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
-								<ul class="nav navbar-nav">
 
-									<!-- Mega Menu -->
-									<?php 
-										$index = 0;
+							</ul>
+						</li>
 
-										foreach ($this->data['golongan'] as $item) {
-									?>
-									<li class="dropdown" data-menu="dropdown-<?=$item->kdgol?>">
-										<a href="<?php echo site_url('products/'.$item->kdgol); ?>" class="dropdown-toggle" data-toggle="dropdown" data-menu="dropdown-<?=$item->kdgol?>"><?php echo $item->nama ?><b class="caret"></b></a>
-										<!-- <ul class="dropdown-menu multi-column columns-3">
-										</ul> -->
-									</li>
-									<?php 
-											$index++;
-											// if ($index == 5) break;
-										}
-									?>
-								</ul>
-							</div>
-						</nav>
-					</div>
-					<div class="top-right">
-						<ul style="display: inline-flex;">
-							<?php if ($admin_link): ?>
-							<li><a class="top-text" href="<?php echo site_url('admin'); ?>">Admin</a></li>
-							<?php endif; ?>
-							<?php if ($logout_link): ?>
-							<li class="dropdown"><a class="dropdown-toggle top-text" data-toggle="dropdown" style="cursor: pointer;"><?= $first_name ?>&nbsp;<b class="caret"></b></a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<?php if ($this->ion_auth->logged_in()):
-									if ( ! $this->ion_auth->is_admin()  && !isset($_SESSION['guest']) ): ?>
-									<li class=""><a href="<?= site_url('akun'); ?>"><i class="mi fa fa-user"></i> Profile</a></li>
-									<li class=""><a href="<?= site_url('akun?p=pending'); ?>"><i class="mi fa fa-book"></i> Orders</a></li>
-									<li class=""><a href="<?= site_url('akun?p=histori'); ?>"><i class="mi fa fa-bar-chart-o"></i> History</a></li>
-									<li role="separator" class="divider"></li>
-									<?php endif; endif; ?>
-									<li class=""><a href="<?= site_url('auth/logout/public'); ?>"><i class="mi fa fa-sign-out"></i> Logout</a></li>
-								</ul>
-							</li>
-							<!-- <li><a class="top-text" href="<?php echo site_url('auth/logout/public'); ?>">Logout</a></li> -->
-							<?php else: ?>
-							<li><a class="top-text" href="<?php echo site_url('register'); ?>">Register</a></li>
-							<li><a class="top-text" href="<?php echo site_url('login'); ?>">Sign In</a></li>
-							<?php endif; ?>
-							<li><a class="top-text" href="#" id="cart">Cart&nbsp;<img src="<?= site_url('images/bag.png'); ?>" alt="Cart" /></a>
-							&nbsp;<span class="badge badge-primary"><?php if($this->session->userdata('totqty')): echo $this->session->userdata('totqty'); else: echo '0'; endif; ?></span></li>
-						</ul>
-						<h4><a href="javascript:void(0);" onclick="javascript:introJs().setOption('tooltipClass', 'customDefault').start();">Help Me</a></h4>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-			
-			<script type="text/javascript" src="<?=base_url('js/intro.js');?>"></script>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span> Chef Jackets </span></a>
+							<ul class="dropdown-menu multi multi2">
+								<div class="row">
 
-			<div class="heder-bottom">
-				<div class="container">
-					<div class="logo-nav">
-						<div class="logo-nav-left1">
-							<nav class="navbar navbar-default" id="nav2">
-							<!-- Brand and toggle get grouped for better mobile display -->
-							<div class="navbar-header nav_2">
-								<button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs2">
-									<span class="sr-only">Toggle navigation</span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
+									<?php foreach ($item_22 as $detail) { ?>	
+									<div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
+										<a href="<?= site_url('subcategories/'.$detail->kdgol.'/'.$detail->kdgol2); ?>"><img src="<?php echo site_url($products_dir.'/'.$detail->gbr); ?>" alt="<?= $detail->nama ?>"></a>
+										<p class="sample"><a href="<?= site_url('subcategories/'.$detail->kdgol.'/'.$detail->kdgol2); ?>"><?= $detail->nama ?></a></p>
+									</div>
+									<?php } ?>
+									<div class="clearfix"></div>
+								</div>
+
+							</ul>
+						</li>
+
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span> Chef Hats </span></a>
+							<ul class="dropdown-menu multi multi3">
+								<div class="row">
+
+									<?php foreach ($item_23 as $detail) { ?>	
+									<div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
+										<a href="<?= site_url('subcategories/'.$detail->kdgol.'/'.$detail->kdgol2); ?>"><img src="<?php echo site_url($products_dir.'/'.$detail->gbr); ?>" alt="<?= $detail->nama ?>"></a>
+										<p class="sample"><a href="<?= site_url('subcategories/'.$detail->kdgol.'/'.$detail->kdgol2); ?>"><?= $detail->nama ?></a></p>
+									</div>
+									<?php } ?>
+									<div class="clearfix"></div>
+								</div>
+
+							</ul>
+						</li>
+
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span> Chef Pants </span></a>
+							<ul class="dropdown-menu multi multi4">
+								<div class="row">
+
+									<?php foreach ($item_24 as $detail) { ?>	
+									<div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
+										<a href="<?= site_url('subcategories/'.$detail->kdgol.'/'.$detail->kdgol2); ?>"><img src="<?php echo site_url($products_dir.'/'.$detail->gbr); ?>" alt="<?= $detail->nama ?>"></a>
+										<p class="sample"><a href="<?= site_url('subcategories/'.$detail->kdgol.'/'.$detail->kdgol2); ?>"><?= $detail->nama ?></a></p>
+									</div>
+									<?php } ?>
+									<div class="clearfix"></div>
+								</div>
+
+							</ul>
+						</li>
+
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span> Kitchen Shoes </span></a>
+							<ul class="dropdown-menu multi multi5">
+								<div class="row">
+
+									<?php foreach ($item_25 as $detail) { ?>	
+									<div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
+										<a href="<?= site_url('subcategories/'.$detail->kdgol.'/'.$detail->kdgol2); ?>"><img src="<?php echo site_url($products_dir.'/'.$detail->gbr); ?>" alt="<?= $detail->nama ?>"></a>
+										<p class="sample"><a href="<?= site_url('subcategories/'.$detail->kdgol.'/'.$detail->kdgol2); ?>"><?= $detail->nama ?></a></p>
+									</div>
+									<?php } ?>
+									<div class="clearfix"></div>
+								</div>
+
+							</ul>
+						</li>
+
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle hyper" data-toggle="dropdown"><span> Accessories </span></a>
+							<ul class="dropdown-menu multi multi6">
+								<div class="row">
+
+									<?php foreach ($item_23 as $detail) { ?>	
+									<div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
+										<a href="<?= site_url('subcategories/'.$detail->kdgol.'/'.$detail->kdgol2); ?>"><img src="<?php echo site_url($products_dir.'/'.$detail->gbr); ?>" alt="<?= $detail->nama ?>"></a>
+										<p class="sample"><a href="<?= site_url('subcategories/'.$detail->kdgol.'/'.$detail->kdgol2); ?>"><?= $detail->nama ?></a></p>
+									</div>
+									<?php } ?>
+									<div class="clearfix"></div>
+								</div>
+
+							</ul>
+						</li>
+						<!-- <li class="wthreesearch">
+							<form action="#" method="post">
+								<input type="search" name="Search" placeholder="Search for a Product" required="">
+								<button type="submit" class="btn btn-default search" aria-label="Left Align">
+									<i class="fa fa-search" aria-hidden="true"></i>
 								</button>
-							</div> 
-							<div class="collapse navbar-collapse" id="bs-megadropdown-tabs2">
-								
-								<ul class="nav navbar-nav">
-
-									<!-- Mega Menu -->
-									<?php 
-										$index = 0;
-
-										foreach ($this->data['golongan'] as $item) {
-									?>
-									<li class="dropdown">
-										<a href="<?php echo site_url('products/'.$item->kdgol); ?>" class="dropdown-toggle" data-toggle="dropdown"><?php echo $item->nama ?><b class="caret"></b></a>
-											<ul class="dropdown-menu multi-column columns-3">
-											<div class="row">
-												<?php foreach ($this->data['item_'.$item->kdgol] as $detail) { ?>
-												<li class="col-sm-2 multi-gd-img">
-													<div class="row text-center"><label class="block-with-text"><?php echo $detail->nama ?></label></div>
-													<div class="row">
-														<div class="sample">
-														<a href="<?php echo site_url('subcategories/'.$item->kdgol.'/'.$detail->kdgol2); ?>">
-															<img src="<?php echo site_url($this->data['products_dir'].'/'.$detail->gbr); ?>" alt="<?php echo $detail->nama ?>"/></a>
-														</div>
-													</div>
-													<!-- <div><label class="block-with-text"><?php echo $detail->nama ?></label></div> -->
-													<div class="row text-center">
-														<a class="view-more btn- btn-sm" href="<?php echo site_url('subcategories/'.$item->kdgol.'/'.$detail->kdgol2); ?>">More</a>
-													</div>
-												</li>
-												<?php } ?>
-											</div>
-										</ul>
-									</li>
-									<?php 
-											$index++;
-										}
-									?>
-								</ul>
-							</div>
-							</nav>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
+							</form>
+						</li>
+						<li class="wthreecartaits wthreecartaits2 cart cart box_1"> 
+						 <form action="#" method="post" class="last"> 
+								<input type="hidden" name="cmd" value="_cart" />
+								<input type="hidden" name="display" value="1" />
+								<button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+							</form>   
+						</li> -->
+					</ul>
 				</div>
-	
+				<div class="top-right">
+					<ul class="nav navbar-nav">
+						<li><a href="<?= site_url('contact'); ?>">Contact Us</a></li>
+						<li><a href="<?= site_url('find-store'); ?>">Find Store</a></li>
+						<li><a href="<?= site_url('login'); ?>">Login/Register</a></li>
+					</ul>
+					<span><a class="top-text" href="#" id="cart"><i class="fa fa-shopping-cart cart-icon"></i></a><span class="badge badge-primary">0</span></span>
+				</div>
+
 			</div>
-		</div>
+		</nav>
+		<!-- //Navigation -->
+
+	</div>
 	<!--header-->
 	
-	
-	<?php 
-		$index = 0;
-
-		foreach ($this->data['golongan'] as $item) {
-	?>
-	<div id="dropdown-<?=$item->kdgol?>" class="dropdown-menu catalog">
-	<?php foreach ($this->data['item_'.$item->kdgol] as $detail) { ?>
-		<div class="col-sm-2 multi-gd-img">
-			<div class="row text-center"><label class="block-with-text"><?php echo $detail->nama ?></label></div>
-			<div class="row">
-				<div class="sample">
-					<a href="<?php echo site_url('subcategories/'.$item->kdgol.'/'.$detail->kdgol2); ?>">
-					<img src="<?php echo site_url($this->data['products_dir'].'/'.$detail->gbr); ?>" alt="<?php echo $detail->nama ?>"/></a>
-				</div>
-			</div>
-			<!-- <div class="row text-center"><label class="block-with-text"><?php echo $detail->kdbar ?></label></div> -->
-			<div class="row text-center">
-				<a class="view-more btn- btn-sm" href="<?php echo site_url('subcategories/'.$item->kdgol.'/'.$detail->kdgol2); ?>">More</a>
-			</div>
-		</div>
-	<?php } ?>
-	</div>
-	<?php } ?>
-
 	<div class="shopping-cart">
-		<div class="shopping-cart-header">
+		<!-- <div class="shopping-cart-header">
 		<i class="fa fa-shopping-cart cart-icon"></i><span class="badge"><?php if($this->session->userdata('totqty')): echo number_format($this->session->userdata('totqty'),0,",","."); else: echo '0'; endif; ?></span>
 		<div class="shopping-cart-total">
 			<span class="lighter-text">Total:&nbsp;</span>
 			<span class="main-color-text">Rp<?php if($this->session->userdata('tot_price')): echo number_format($this->session->userdata('tot_price'),0,",","."); else: echo '0'; endif; ?></span>
 		</div>
-		</div> <!--end shopping-cart-header -->
+		</div> -->
 
 		<ul class="shopping-cart-items">
 		<?php 
@@ -477,8 +378,8 @@ $(window).load(function() {
 					<img src="<?= site_url($this->data['products_dir'].'/'.$item["gambar"]); ?>" alt="item1" />
 				</div>
 				<div class="cart-desc">
-					<span class="item-name"><?= $item["nama"]; ?></span>
 					<span class="item-price">Rp<?= number_format($item_price, 0, ',', '.') ?></span>
+					<span class="item-name"><?= $item["nama"]; ?></span>
 					<span class="item-quantity">Qty: <?= $item["qty"]; ?></span>
 				</div>
 				<div class="rem2">
@@ -489,5 +390,8 @@ $(window).load(function() {
 		<?php } endif; ?>
 		</ul>
 
-		<a href="<?php echo site_url('cart'); ?>" class="button <?php if($this->session->userdata('totqty')): echo ''; else: echo 'btn disabled'; endif;?>">Checkout</a>
+		<!-- <a href="<?php echo site_url('cart'); ?>" class="button <?php if($this->session->userdata('totqty')): echo ''; else: echo 'btn disabled'; endif;?>">Checkout</a> -->
+
+		<div class="clearfix"></div>
+		<p class="cart-footer"><a href="<?= site_url('cart'); ?>">Cancel</a>&nbsp;<a href="<?= site_url('cart'); ?>">Checkout</a></p>
 	</div> <!--end shopping-cart -->
